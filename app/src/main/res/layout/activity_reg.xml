@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:id="@+id/reg"
+    android:layout_height="match_parent"
+    tools:context=".RegActivity">
+
+
+    <LinearLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:background="#FFA451"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:ignore="Orientation" />
+
+
+    <ImageView
+        android:id="@+id/basket"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/fruit_basket"
+        app:layout_constraintTop_toTopOf="@id/container"
+        app:layout_constraintBottom_toBottomOf="@id/container"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Регистрация"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/nun_med"
+        app:layout_constraintTop_toBottomOf="@id/container"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp" />
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="24dp">
+
+            <EditText
+                android:id="@+id/loginEd"
+                style="@style/EditTextStyle"
+                android:hint="Логин" />
+
+            <EditText
+                android:id="@+id/passEd"
+                style="@style/EditTextStyle"
+                android:hint="Пароль"
+                android:inputType="textPassword" />
+
+            <EditText
+                android:id="@+id/repPassEd"
+                style="@style/EditTextStyle"
+                android:hint="Повторите пароль"
+                android:inputType="textPassword" />
+
+            <EditText
+                android:id="@+id/emailEd"
+                style="@style/EditTextStyle"
+                android:hint="Почта"
+                android:inputType="textEmailAddress" />
+
+            <EditText
+                android:id="@+id/phoneEd"
+                style="@style/EditTextStyle"
+                android:hint="Номер телефона"
+                android:inputType="phone" />
+
+            <EditText
+                android:id="@+id/cityEd"
+                style="@style/EditTextStyle"
+                android:hint="Город" />
+
+            <EditText
+                android:id="@+id/streetEd"
+                style="@style/EditTextStyle"
+                android:hint="Улица" />
+
+            <EditText
+                android:id="@+id/numStrEd"
+                style="@style/EditTextStyle"
+                android:hint="Номер дома" />
+
+            <android.widget.Button
+                android:id="@+id/btnStart"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginTop="32dp"
+                android:background="@drawable/rad10"
+                android:backgroundTint="#FFA451"
+                android:text="Продолжить"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textAllCaps="false" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

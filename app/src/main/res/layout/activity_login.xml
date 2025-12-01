@@ -88,30 +88,33 @@
         tools:ignore="MissingConstraints">
     </ImageView>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Авторизация"
+        app:layout_constraintBottom_toTopOf="@id/main"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="10dp"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        android:fontFamily="@font/nun_med"
+        tools:ignore="MissingConstraints">
+    </TextView>
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@id/main"
         android:layout_width="327dp"
-        android:layout_height="199dp"
-        android:layout_marginTop="56dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
         app:layout_constraintTop_toBottomOf="@id/container"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         tools:ignore="MissingConstraints">
 
-        <TextView
-            android:id="@+id/get"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="What is your firstname?"
-            android:textColor="#27214D"
-            android:textSize="19dp"
-            android:fontFamily="@font/nun_med"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="1dp"
-            app:layout_constraintTop_toTopOf="parent">
-        </TextView>
 
         <EditText
-            android:id="@+id/edText"
+            android:id="@+id/loginEd"
             android:layout_width="327dp"
             android:layout_height="56dp"
             android:background="@drawable/rectangle_3"
@@ -120,28 +123,44 @@
             android:layout_marginTop="16dp"
             android:textSize="20dp"
             android:paddingStart="25dp"
-            android:hint="Firstname"
+            android:hint="Логин"
             android:fontFamily="@font/nun_reg"
             android:textAlignment="textStart"
-            app:layout_constraintTop_toBottomOf="@id/get"
+            app:layout_constraintTop_toTopOf="parent"
+            >
+        </EditText>
+
+        <EditText
+            android:id="@+id/passEd"
+            android:layout_width="327dp"
+            android:layout_height="56dp"
+            android:background="@drawable/rectangle_3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="16dp"
+            android:textSize="20dp"
+            android:paddingStart="25dp"
+            android:hint="Пароль"
+            android:fontFamily="@font/nun_reg"
+            android:textAlignment="textStart"
+            app:layout_constraintTop_toBottomOf="@id/loginEd"
             >
         </EditText>
 
         <android.widget.Button
             android:id="@+id/btnStart"
-            android:layout_width="327dp"
+            android:layout_width="300dp"
             android:layout_height="56dp"
             android:layout_marginTop="42dp"
             android:background="@drawable/rad10"
             android:backgroundTint="#FFA451"
-            android:text="Start Ordering"
+            android:text="Продолжить"
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="16dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/edText">
+            app:layout_constraintTop_toBottomOf="@+id/passEd">
 
         </android.widget.Button>
 
