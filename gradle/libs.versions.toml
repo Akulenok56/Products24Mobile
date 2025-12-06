@@ -8,6 +8,10 @@ espressoCore = "3.7.0"
 appcompat = "1.7.1"
 material = "1.13.0"
 activity = "1.8.2"
+retrofit = "2.9.0"
+gsonConverter = "2.9.0"
+okhttpLogging = "5.0.0-alpha.11"
+lifecycle = "2.6.2"
 
 constraintlayout = "2.2.1"
 
@@ -20,6 +24,11 @@ androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
+retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
+retrofit-gson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "gsonConverter" }
+okhttp-logging = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttpLogging" }
+lifecycle-viewmodel = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
+lifecycle-livedata = { group = "androidx.lifecycle", name = "lifecycle-livedata-ktx", version.ref = "lifecycle" }
 
 
 [plugins]
