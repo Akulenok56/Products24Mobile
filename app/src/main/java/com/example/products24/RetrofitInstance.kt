@@ -20,8 +20,8 @@ object RetrofitInstance {
 
         val client = OkHttpClient.Builder()
             .addInterceptor(logger)
-            .addInterceptor(AuthInterceptor(context))     // добавляем JWT header
-            .authenticator(TokenAuthenticator(context))   // обработка 401
+            .addInterceptor(AuthInterceptor(context))
+            .authenticator(TokenAuthenticator(context))
             .connectTimeout(30, TimeUnit.SECONDS)
             .readTimeout(30, TimeUnit.SECONDS)
             .build()

@@ -31,7 +31,7 @@ class RegActivity : AppCompatActivity() {
 
         RetrofitInstance.init(
             applicationContext,
-            "http://10.0.2.2:5000/"
+            "http://10.0.2.2:5162/"
         )
 
         initViews()
@@ -54,7 +54,8 @@ class RegActivity : AppCompatActivity() {
     }
 
     private fun registerUser() {
-        val login = loginEd.text.toString().trim()
+
+        val fullName = loginEd.text.toString().trim()
         val pass = passEd.text.toString().trim()
         val repass = repPassEd.text.toString().trim()
         val email = emailEd.text.toString().trim()
@@ -63,8 +64,8 @@ class RegActivity : AppCompatActivity() {
         val street = streetEd.text.toString().trim()
         val house = numStrEd.text.toString().trim()
 
-        if (login.isEmpty() || pass.isEmpty() || email.isEmpty()) {
-            Toast.makeText(this, "Заполните обязательные поля", Toast.LENGTH_SHORT).show()
+        if (fullName.isEmpty() || email.isEmpty() || pass.isEmpty()) {
+            Toast.makeText(this, "ФИО, почта и пароль обязательны", Toast.LENGTH_SHORT).show()
             return
         }
 
@@ -74,13 +75,13 @@ class RegActivity : AppCompatActivity() {
         }
 
         val request = RegisterRequest(
-            password = pass,
+            fullName = fullName,
             email = email,
             phoneNumber = phone,
+            password = pass,
             city = city,
             street = street,
-            houseNumber = house,
-            fullName = login
+            houseNumber = house
         )
 
         CoroutineScope(Dispatchers.IO).launch {
@@ -108,4 +109,5 @@ class RegActivity : AppCompatActivity() {
             }
         }
     }
+
 }

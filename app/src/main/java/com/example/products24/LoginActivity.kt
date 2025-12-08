@@ -17,6 +17,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var loginEd: EditText
     private lateinit var passEd: EditText
     private lateinit var btnLogin: Button
+    private lateinit var btnToReg: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,12 +26,20 @@ class LoginActivity : AppCompatActivity() {
         // инициализация Retrofit
         RetrofitInstance.init(
             applicationContext,
-            "http://10.0.2.2:5000/"   // или твой реальный URL
+            "http://10.0.2.2:5162/"   // или твой реальный URL
         )
 
         loginEd = findViewById(R.id.loginEd)
         passEd = findViewById(R.id.passEd)
         btnLogin = findViewById(R.id.btnStart)
+        btnToReg = findViewById(R.id.btnToReg)
+
+        btnToReg.setOnClickListener {
+            val intent = Intent(this, RegActivity::class.java)
+            startActivity(intent)
+        }
+
+
 
         btnLogin.setOnClickListener {
             login()
@@ -38,24 +47,24 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun login() {
-        val login = loginEd.text.toString().trim()
+
+        val email = loginEd.text.toString().trim()
         val pass = passEd.text.toString().trim()
 
-        if (login.isEmpty() || pass.isEmpty()) {
-            Toast.makeText(this, "Введите логин и пароль", Toast.LENGTH_SHORT).show()
+        if (email.isEmpty() || pass.isEmpty()) {
+            Toast.makeText(this, "Введите почту и пароль", Toast.LENGTH_SHORT).show()
             return
         }
 
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 val api = RetrofitInstance.authApi()
-                val response = api.login(LoginRequest(login, pass))
+                val response = api.login(LoginRequest(email, pass))
 
                 withContext(Dispatchers.Main) {
                     if (response.isSuccessful && response.body() != null) {
 
                         val token = response.body()!!.token
-
                         Session.saveToken(applicationContext, token)
 
                         Toast.makeText(this@LoginActivity, "Успешный вход", Toast.LENGTH_SHORT).show()
@@ -64,9 +73,10 @@ class LoginActivity : AppCompatActivity() {
                         finish()
 
                     } else {
-                        Toast.makeText(this@LoginActivity, "Неверный логин или пароль", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@LoginActivity, "Неверная почта или пароль", Toast.LENGTH_SHORT).show()
                     }
                 }
+
             } catch (e: Exception) {
                 withContext(Dispatchers.Main) {
                     Toast.makeText(this@LoginActivity, "Ошибка сервера: ${e.message}", Toast.LENGTH_SHORT).show()
@@ -74,4 +84,5 @@ class LoginActivity : AppCompatActivity() {
             }
         }
     }
+
 }
