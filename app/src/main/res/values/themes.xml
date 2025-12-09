@@ -16,4 +16,21 @@
         <item name="android:fontFamily">@font/nun_reg</item>
         <item name="android:textColorHint">@color/gray</item>
     </style>
+
+    <style name="BottomSheetDialogTheme" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/CustomBottomSheetStyle</item>
+    </style>
+
+    <style name="CustomBottomSheetStyle" parent="Widget.Design.BottomSheet.Modal">
+        <!-- Затемнение фона -->
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:backgroundDimAmount">0.5</item>
+
+        <!-- Скругления -->
+        <item name="android:background">@drawable/rad20</item>
+
+        <!-- Анимация -->
+        <item name="android:windowEnterAnimation">@anim/bottom_slide_up</item>
+        <item name="android:windowExitAnimation">@anim/bottom_slide_down</item>
+    </style>
 </resources>
