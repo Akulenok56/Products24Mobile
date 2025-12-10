@@ -12,10 +12,11 @@ retrofit = "2.9.0"
 gsonConverter = "2.9.0"
 okhttpLogging = "5.0.0-alpha.11"
 lifecycle = "2.6.2"
-
+glide = "4.16.0"
 constraintlayout = "2.2.1"
 
 [libraries]
+glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }

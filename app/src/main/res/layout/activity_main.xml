@@ -72,7 +72,7 @@
         android:id="@+id/recCombo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Рекомендованные товары"
+        android:text="Все товары"
         android:textSize="24sp"
         android:textColor="#27214D"
         app:layout_constraintStart_toStartOf="parent"
@@ -85,7 +85,7 @@
     </TextView>
 
     <HorizontalScrollView
-        android:id="@id/leftCont"
+        android:id="@+id/scroll1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:overScrollMode="never"
@@ -101,89 +101,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/leftCont"
-                android:layout_width="152dp"
-                android:layout_height="183dp"
-                android:background="@drawable/rad16"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginBottom="10dp"
-                android:elevation="4dp"
-                app:layout_constraintStart_toStartOf="parent"
-                tools:ignore="MissingConstraints">
-
-                <ImageButton
-                    android:layout_width="16dp"
-                    android:src="@drawable/heart"
-                    android:backgroundTint="@android:color/transparent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:layout_height="15dp">
-                </ImageButton>
-
-                <ImageButton
-                    android:layout_width="24dp"
-                    android:src="@drawable/plus"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    android:layout_marginBottom="18dp"
-                    android:layout_marginEnd="16dp"
-                    android:backgroundTint="@android:color/transparent"
-                    android:layout_height="24dp">
-                </ImageButton>
-
-                <LinearLayout
-                    android:layout_width="57dp"
-                    android:orientation="horizontal"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    android:layout_marginStart="17dp"
-                    android:layout_marginBottom="20dp"
-                    android:gravity="center"
-                    android:layout_height="20dp">
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/rubl"
-                        >
-                    </ImageView>
-                    <TextView
-                        android:id="@+id/recpriceHoneyLime"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="#F08626"
-                        android:textSize="14sp"
-                        android:text=""
-                        android:fontFamily="@font/nun_reg">
-                    </TextView>
-                </LinearLayout>
-
-                <ImageView
-                    android:id="@+id/recimageHoneyLime"
-                    android:layout_width="wrap_content"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:layout_marginTop="22dp"
-                    android:layout_height="wrap_content">
-                </ImageView>
-                <TextView
-                    android:id="@+id/recnameHoney"
-                    android:layout_width="wrap_content"
-                    android:textSize="16sp"
-                    android:textColor="#27214D"
-                    android:fontFamily="@font/nun_med"
-                    app:layout_constraintTop_toBottomOf="@id/recimageHoneyLime"
-                    android:layout_marginTop="8dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_height="wrap_content">
-                </TextView>
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
 
         </LinearLayout>
 
@@ -199,7 +116,7 @@
         android:scrollbars="none"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/leftCont"
+        app:layout_constraintTop_toBottomOf="@id/scroll1"
         android:layout_marginTop="35dp">
 
         <LinearLayout
@@ -208,63 +125,54 @@
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/categoryMeat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="16dp"
+                android:padding="14dp"
+                android:clickable="true"
+                android:text="Мясо"
+                android:textColor="#000000"
                 android:fontFamily="@font/nun_med"
-                android:textStyle="bold"
-                android:clickable="true"
-                android:text="Популярное" />
+                android:textStyle="bold"/>
 
             <TextView
+                android:id="@+id/categoryBakery"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="14dp"
                 android:clickable="true"
-                android:textColor="#938DB5"
-                android:text="Новое" />
+                android:text="Выпечка"
+                android:textColor="#938DB5"/>
 
             <TextView
+                android:id="@+id/categoryFruits"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="14dp"
                 android:clickable="true"
-                android:textColor="#938DB5"
-                android:text="Мясо" />
+                android:text="Овощи и фрукты"
+                android:textColor="#938DB5"/>
 
             <TextView
+                android:id="@+id/categoryDairy"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="14dp"
                 android:clickable="true"
-                android:textColor="#938DB5"
-                android:text="Выпечка" />
+                android:text="Молочная продукция"
+                android:textColor="#938DB5"/>
 
             <TextView
+                android:id="@+id/categoryDrinks"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="14dp"
                 android:clickable="true"
-                android:textColor="#938DB5"
-                android:text="Овощи и фрукты" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="14dp"
-                android:clickable="true"
-                android:textColor="#938DB5"
-                android:text="Молочная продукция" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="14dp"
-                android:clickable="true"
-                android:textColor="#938DB5"
-                android:text="Напитки" />
-
+                android:text="Напитки"
+                android:textColor="#938DB5"/>
         </LinearLayout>
     </HorizontalScrollView>
+
 
     <HorizontalScrollView
         android:id="@id/downCont"
@@ -283,88 +191,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/downCont"
-                android:layout_width="152dp"
-                android:layout_height="183dp"
-                android:background="@drawable/rad16"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginBottom="10dp"
-                android:elevation="4dp"
-                app:layout_constraintStart_toStartOf="parent"
-                tools:ignore="MissingConstraints">
-
-                <ImageButton
-                    android:layout_width="16dp"
-                    android:src="@drawable/heart"
-                    android:backgroundTint="@android:color/transparent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:layout_height="15dp">
-                </ImageButton>
-
-                <ImageButton
-                    android:layout_width="24dp"
-                    android:src="@drawable/plus"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    android:layout_marginBottom="18dp"
-                    android:layout_marginEnd="16dp"
-                    android:backgroundTint="@android:color/transparent"
-                    android:layout_height="24dp">
-                </ImageButton>
-
-                <LinearLayout
-                    android:layout_width="57dp"
-                    android:orientation="horizontal"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    android:layout_marginStart="17dp"
-                    android:layout_marginBottom="20dp"
-                    android:gravity="center"
-                    android:layout_height="20dp">
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/rubl"
-                        >
-                    </ImageView>
-                    <TextView
-                        android:id="@+id/ppriceHoneyLime"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="#F08626"
-                        android:textSize="14sp"
-                        android:text=""
-                        android:fontFamily="@font/nun_reg">
-                    </TextView>
-                </LinearLayout>
-
-                <ImageView
-                    android:id="@+id/pimageHoneyLime"
-                    android:layout_width="wrap_content"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:layout_marginTop="22dp"
-                    android:layout_height="wrap_content">
-                </ImageView>
-                <TextView
-                    android:id="@+id/pnameHoney"
-                    android:layout_width="wrap_content"
-                    android:textSize="16sp"
-                    android:textColor="#27214D"
-                    android:fontFamily="@font/nun_med"
-                    app:layout_constraintTop_toBottomOf="@id/pimageHoneyLime"
-                    android:layout_marginTop="8dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_height="wrap_content">
-                </TextView>
-            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
         </LinearLayout>

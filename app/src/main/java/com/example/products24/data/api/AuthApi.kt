@@ -2,10 +2,12 @@ package com.example.products24.data.api
 
 import com.example.products24.data.model.LoginRequest
 import com.example.products24.data.model.LoginResponse
+import com.example.products24.data.model.ProductDto
 import com.example.products24.data.model.RegisterRequest
 import com.example.products24.data.model.UserResponse
 import retrofit2.Response
 import retrofit2.http.Body
+import retrofit2.http.GET
 import retrofit2.http.POST
 
 interface AuthApi {
@@ -15,4 +17,6 @@ interface AuthApi {
 
     @POST("auth/login")
     suspend fun login(@Body request: LoginRequest): Response<LoginResponse>
+    @GET("products")
+    suspend fun getProducts(): List<ProductDto>
 }
