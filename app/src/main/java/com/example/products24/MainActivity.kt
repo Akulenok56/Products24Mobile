@@ -11,9 +11,11 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.example.products24.data.api.AuthApi
+import com.example.products24.data.model.AddCartItemDto
 import com.example.products24.data.model.ProductDto
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.coroutines.launch
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -22,6 +24,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var leftContainer: LinearLayout
     private lateinit var downContainer: LinearLayout
     private var activeCategory: TextView? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -127,10 +130,13 @@ class MainActivity : AppCompatActivity() {
         val name = view.findViewById<TextView>(R.id.pnameHoney)
         val price = view.findViewById<TextView>(R.id.ppriceHoneyLime)
         val image = view.findViewById<ImageView>(R.id.pimageHoneyLime)
+        val btnAdd = view.findViewById<ImageButton>(R.id.addProduct)
 
         name.text = product.name
         price.text = product.price.toString()
-
+        btnAdd.setOnClickListener {
+            addToCart(product.productID)
+        }
         Glide.with(this)
             .load(product.imageUrl)
             .into(image)
@@ -145,6 +151,7 @@ class MainActivity : AppCompatActivity() {
         val name = view.findViewById<TextView>(R.id.pnameHoney)
         val price = view.findViewById<TextView>(R.id.ppriceHoneyLime)
         val image = view.findViewById<ImageView>(R.id.pimageHoneyLime)
+        val btnAdd = view.findViewById<ImageButton>(R.id.addProduct)
 
         name.text = product.name
         price.text = product.price.toString()
@@ -153,9 +160,49 @@ class MainActivity : AppCompatActivity() {
             .load(product.imageUrl)
             .into(image)
 
+
+        btnAdd.setOnClickListener {
+            addToCart(product.productID)
+        }
+
         downContainer.addView(view)
     }
+    private fun addToCart(productId: String) {
+        lifecycleScope.launch {
+            try {
+                val api = RetrofitInstance.create(AuthApi::class.java)
 
+                val dto = AddCartItemDto(
+                    productID = productId,
+                    quantity = 1
+                )
+
+                val response = api.addToCart(dto)
+
+                if (response.isSuccessful) {
+                    Toast.makeText(
+                        this@MainActivity,
+                        "Товар добавлен в корзину",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                } else {
+                    Toast.makeText(
+                        this@MainActivity,
+                        "Ошибка добавления в корзину",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+
+            } catch (e: Exception) {
+                e.printStackTrace()
+                Toast.makeText(
+                    this@MainActivity,
+                    "Ошибка соединения с сервером",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+    }
 
     private fun showSearchDialog(query: String) {
         val filteredProducts = allProducts.filter {
@@ -184,6 +231,7 @@ class MainActivity : AppCompatActivity() {
                 val name = itemView.findViewById<TextView>(R.id.pnameSearch)
                 val price = itemView.findViewById<TextView>(R.id.ppriceSearch)
                 val image = itemView.findViewById<ImageView>(R.id.pimageSearch)
+                val btnAdd = itemView.findViewById<ImageButton>(R.id.addProduct)
 
                 name.text = product.name
                 price.text = product.price.toString()
@@ -192,6 +240,10 @@ class MainActivity : AppCompatActivity() {
                     .load(product.imageUrl)
                     .into(image)
 
+                btnAdd.setOnClickListener {
+                    addToCart(product.productID)
+                }
+
                 container.addView(itemView)
             }
         }
@@ -199,4 +251,5 @@ class MainActivity : AppCompatActivity() {
         dialog.setContentView(view)
         dialog.show()
     }
+
 }

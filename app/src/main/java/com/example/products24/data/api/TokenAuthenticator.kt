@@ -9,9 +9,8 @@ import okhttp3.Route
 
 class TokenAuthenticator(private val context: Context) : Authenticator {
     override fun authenticate(route: Route?, response: Response): Request? {
-        // Если получили 401 — удаляем токен и не реавторизуемся.
-        // Можно добавить логику refresh token здесь.
+
         Session.clearToken(context)
-        return null // возвращая null — не повторяем запрос
+        return null
     }
 }

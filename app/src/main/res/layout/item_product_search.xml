@@ -30,6 +30,7 @@
         </ImageButton>
 
         <ImageButton
+            android:id="@+id/addProduct"
             android:layout_width="24dp"
             android:src="@drawable/plus"
             app:layout_constraintEnd_toEndOf="parent"
