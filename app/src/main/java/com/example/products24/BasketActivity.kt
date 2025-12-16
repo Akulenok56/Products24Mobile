@@ -60,8 +60,25 @@ class BasketActivity : AppCompatActivity() {
         val view = layoutInflater.inflate(R.layout.bottom_sheet_pay, null)
 
         view.findViewById<ImageView>(R.id.btnClose).setOnClickListener { dialog.dismiss() }
-        view.findViewById<Button>(R.id.btnPay).setOnClickListener { dialog.dismiss() }
-        view.findViewById<Button>(R.id.btnPayCard).setOnClickListener { }
+        view.findViewById<Button>(R.id.btnPay).setOnClickListener {
+            startActivity(Intent(this, OrderSuccses::class.java))
+        }
+        view.findViewById<Button>(R.id.btnPayCard).setOnClickListener {
+            showCardDialog()
+        }
+
+        dialog.setContentView(view)
+        dialog.show()
+    }
+    private fun showCardDialog() {
+        val dialog = BottomSheetDialog(this, R.style.BottomSheetDialogTheme)
+        val view = layoutInflater.inflate(R.layout.bottom_sheet_cardinfo, null)
+
+        view.findViewById<ImageView>(R.id.btnClose).setOnClickListener { dialog.dismiss() }
+
+        view.findViewById<Button>(R.id.btnPayCard).setOnClickListener {
+            startActivity(Intent(this, OrderSuccses::class.java))
+        }
 
         dialog.setContentView(view)
         dialog.show()
