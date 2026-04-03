@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@color/white">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Состав заказа"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:textColor="#27214D"
+        android:layout_marginBottom="16dp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="#F8F8F8"
+        android:padding="12dp"
+        android:layout_marginBottom="16dp">
+
+        <TextView
+            android:id="@+id/tvDetailCustomerName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Клиент: Загрузка..."
+            android:textStyle="bold"
+            android:textColor="#27214D"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:id="@+id/tvDetailPhone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Телефон: -"
+            android:layout_marginTop="4dp"/>
+
+        <TextView
+            android:id="@+id/tvDetailAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Адрес: -"
+            android:layout_marginTop="4dp"
+            android:textColor="#555555"/>
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvOrderItems"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#EEEEEE"
+        android:layout_marginVertical="16dp"/>
+
+    <TextView
+        android:id="@+id/tvOrderDetailsTotal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Итого: 0 ₽"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_gravity="end"/>
+</LinearLayout>

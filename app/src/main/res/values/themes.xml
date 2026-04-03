@@ -33,4 +33,9 @@
         <item name="android:windowEnterAnimation">@anim/bottom_slide_up</item>
         <item name="android:windowExitAnimation">@anim/bottom_slide_down</item>
     </style>
+
+
+    <style name="BottomSheetStyle" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@android:color/transparent</item>
+    </style>
 </resources>

@@ -3,6 +3,7 @@ package com.example.products24
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.*
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -16,7 +17,6 @@ import com.example.products24.data.model.ProductDto
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.coroutines.launch
 
-
 class MainActivity : AppCompatActivity() {
 
     private var allProducts: List<ProductDto> = emptyList()
@@ -24,7 +24,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var leftContainer: LinearLayout
     private lateinit var downContainer: LinearLayout
     private var activeCategory: TextView? = null
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,6 +37,12 @@ class MainActivity : AppCompatActivity() {
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
+        }
+
+        val profileBtn = findViewById<ImageButton>(R.id.profileBtn)
+        profileBtn.setOnClickListener {
+            val intent = Intent(this, ProfileActivity::class.java)
+            startActivity(intent)
         }
 
         btnToBasket = findViewById(R.id.basketBtn)
@@ -111,7 +116,6 @@ class MainActivity : AppCompatActivity() {
                     }
                     showProductsDown(filtered)
                 }
-
             } catch (e: Exception) {
                 e.printStackTrace()
             }
@@ -121,6 +125,40 @@ class MainActivity : AppCompatActivity() {
     private fun showProductsDown(list: List<ProductDto>) {
         downContainer.removeAllViews()
         list.forEach { addProductCardDown(it) }
+    }
+
+
+    private fun showProductDetails(product: ProductDto) {
+        val dialog = BottomSheetDialog(this, R.style.BottomSheetDialogTheme)
+        // Убедись, что R.layout.bottom_sheet_product_details совпадает с именем файла!
+        val view = layoutInflater.inflate(R.layout.bottom_sheet_products_details, null)
+
+        // ДОБАВЛЯЕМ 'val' ПЕРЕД КАЖДОЙ ПЕРЕМЕННОЙ
+        val detName = view.findViewById<TextView>(R.id.detName)
+        val detDescription = view.findViewById<TextView>(R.id.detDescription)
+        val detCalories = view.findViewById<TextView>(R.id.detCalories)
+        val detProteins = view.findViewById<TextView>(R.id.detProteins)
+        val detFats = view.findViewById<TextView>(R.id.detFats)
+        val detCarbs = view.findViewById<TextView>(R.id.detCarbs)
+        val btnAdd = view.findViewById<Button>(R.id.btnAddToCart)
+
+        detName.text = product.name
+        detDescription.text = product.description
+
+        // Используем .toInt() только если уверены, что там число.
+        // Если в DTO это String, пиши просто product.calories
+        detCalories.text = product.calories.toString()
+        detProteins.text = "${product.proteins}г"
+        detFats.text = "${product.fats}г"
+        detCarbs.text = "${product.carbs}г"
+
+        btnAdd.setOnClickListener {
+            addToCart(product.productID)
+            dialog.dismiss()
+        }
+
+        dialog.setContentView(view) // Передаем объект view
+        dialog.show()
     }
 
     private fun addProductCardLeft(product: ProductDto) {
@@ -133,14 +171,14 @@ class MainActivity : AppCompatActivity() {
         val btnAdd = view.findViewById<ImageButton>(R.id.addProduct)
 
         name.text = product.name
-        price.text = product.price.toString()
-        btnAdd.setOnClickListener {
-            addToCart(product.productID)
-        }
-        Glide.with(this)
-            .load(product.imageUrl)
-            .into(image)
+        price.text = "${product.price} ₽"
 
+        // Клик по всей карточке для деталей
+        view.setOnClickListener { showProductDetails(product) }
+
+        btnAdd.setOnClickListener { addToCart(product.productID) }
+
+        Glide.with(this).load(product.imageUrl).into(image)
         leftContainer.addView(view)
     }
 
@@ -154,52 +192,32 @@ class MainActivity : AppCompatActivity() {
         val btnAdd = view.findViewById<ImageButton>(R.id.addProduct)
 
         name.text = product.name
-        price.text = product.price.toString()
+        price.text = "${product.price} ₽"
 
-        Glide.with(this)
-            .load(product.imageUrl)
-            .into(image)
+        // Клик по всей карточке для деталей
+        view.setOnClickListener { showProductDetails(product) }
 
+        btnAdd.setOnClickListener { addToCart(product.productID) }
 
-        btnAdd.setOnClickListener {
-            addToCart(product.productID)
-        }
-
+        Glide.with(this).load(product.imageUrl).into(image)
         downContainer.addView(view)
     }
+
     private fun addToCart(productId: String) {
         lifecycleScope.launch {
             try {
                 val api = RetrofitInstance.create(AuthApi::class.java)
-
-                val dto = AddCartItemDto(
-                    productID = productId,
-                    quantity = 1
-                )
-
+                val dto = AddCartItemDto(productID = productId, quantity = 1)
                 val response = api.addToCart(dto)
 
                 if (response.isSuccessful) {
-                    Toast.makeText(
-                        this@MainActivity,
-                        "Товар добавлен в корзину",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    Toast.makeText(this@MainActivity, "Добавлено в корзину", Toast.LENGTH_SHORT).show()
                 } else {
-                    Toast.makeText(
-                        this@MainActivity,
-                        "Ошибка добавления в корзину",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    Toast.makeText(this@MainActivity, "Ошибка добавления", Toast.LENGTH_SHORT).show()
                 }
-
             } catch (e: Exception) {
                 e.printStackTrace()
-                Toast.makeText(
-                    this@MainActivity,
-                    "Ошибка соединения с сервером",
-                    Toast.LENGTH_SHORT
-                ).show()
+                Toast.makeText(this@MainActivity, "Ошибка соединения", Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -222,7 +240,7 @@ class MainActivity : AppCompatActivity() {
             val tvEmpty = TextView(this)
             tvEmpty.text = "Ничего не найдено"
             tvEmpty.textSize = 16f
-            tvEmpty.setPadding(16, 16, 16, 16)
+            tvEmpty.setPadding(32, 32, 32, 32)
             container.addView(tvEmpty)
         } else {
             filteredProducts.forEach { product ->
@@ -234,16 +252,14 @@ class MainActivity : AppCompatActivity() {
                 val btnAdd = itemView.findViewById<ImageButton>(R.id.addProduct)
 
                 name.text = product.name
-                price.text = product.price.toString()
+                price.text = "${product.price} ₽"
 
-                Glide.with(this)
-                    .load(product.imageUrl)
-                    .into(image)
+                // Клик по карточке в поиске для деталей
+                itemView.setOnClickListener { showProductDetails(product) }
 
-                btnAdd.setOnClickListener {
-                    addToCart(product.productID)
-                }
+                btnAdd.setOnClickListener { addToCart(product.productID) }
 
+                Glide.with(this).load(product.imageUrl).into(image)
                 container.addView(itemView)
             }
         }
@@ -251,5 +267,4 @@ class MainActivity : AppCompatActivity() {
         dialog.setContentView(view)
         dialog.show()
     }
-
 }

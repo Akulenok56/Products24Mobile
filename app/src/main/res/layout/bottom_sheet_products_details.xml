@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/rectangle_21"
+    android:backgroundTint="@color/white"
+    android:orientation="vertical"
+    android:padding="24dp">
+
+    <!-- Индикатор перетаскивания (серый) -->
+    <View
+        android:layout_width="40dp"
+        android:layout_height="4dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="20dp"
+        android:background="#E0E0E0" />
+
+    <!-- Название товара (Твой темно-синий) -->
+    <TextView
+        android:id="@+id/detName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/nun_med"
+        android:text="Название товара"
+        android:textColor="#27214D"
+        android:textSize="22sp"
+        android:textStyle="bold" />
+
+    <!-- Описание (Твой темно-синий) -->
+    <TextView
+        android:id="@+id/detDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:fontFamily="@font/nun_reg"
+        android:text="Описание товара..."
+        android:textColor="#27214D"
+        android:textSize="14sp" />
+
+    <!-- Заголовок БЖУ (Твой вспомогательный фиолетово-синий) -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/nun_med"
+        android:text="Пищевая ценность на 100г:"
+        android:textColor="#938DB5"
+        android:textSize="12sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        android:weightSum="4">
+
+        <!-- Ккал (Твой Оранжевый для акцента на энергии) -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ккал"
+                android:textSize="10sp"
+                android:textColor="#938DB5"
+                android:fontFamily="@font/nun_reg"/>
+            <TextView
+                android:id="@+id/detCalories"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textColor="#FFA451"
+                android:textStyle="bold"
+                android:fontFamily="@font/nun_med"
+                android:textSize="16sp"/>
+        </LinearLayout>
+
+        <!-- Белки -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Белки"
+                android:textSize="10sp"
+                android:textColor="#938DB5"
+                android:fontFamily="@font/nun_reg"/>
+            <TextView
+                android:id="@+id/detProteins"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0г"
+                android:textColor="#27214D"
+                android:textStyle="bold"
+                android:fontFamily="@font/nun_med"
+                android:textSize="16sp"/>
+        </LinearLayout>
+
+        <!-- Жиры -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Жиры"
+                android:textSize="10sp"
+                android:textColor="#938DB5"
+                android:fontFamily="@font/nun_reg"/>
+            <TextView
+                android:id="@+id/detFats"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0г"
+                android:textColor="#27214D"
+                android:textStyle="bold"
+                android:fontFamily="@font/nun_med"
+                android:textSize="16sp"/>
+        </LinearLayout>
+
+        <!-- Углеводы -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Угл."
+                android:textSize="10sp"
+                android:textColor="#938DB5"
+                android:fontFamily="@font/nun_reg"/>
+            <TextView
+                android:id="@+id/detCarbs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0г"
+                android:textColor="#27214D"
+                android:textStyle="bold"
+                android:fontFamily="@font/nun_med"
+                android:textSize="16sp"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Кнопка (Твой Оранжевый) -->
+    <android.widget.Button
+        android:id="@+id/btnAddToCart"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/rad10"
+        android:backgroundTint="#FFA451"
+        android:fontFamily="@font/nun_med"
+        android:text="Добавить в корзину"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+
+</LinearLayout>

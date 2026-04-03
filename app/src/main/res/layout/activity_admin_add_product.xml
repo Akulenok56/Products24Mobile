@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/main"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Новый продукт"
+            android:textColor="#27214D"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/nun_med"
+            android:layout_marginBottom="24dp"/>
+
+        <!-- БЛОК ВЫБОРА ФОТО -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_marginBottom="20dp">
+
+            <ImageView
+                android:id="@+id/ivProductPreview"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:scaleType="centerCrop"
+                android:background="@drawable/rectangle_21"
+                android:src="@android:drawable/ic_menu_camera"
+                android:padding="10dp"
+                android:layout_marginBottom="8dp"/>
+
+            <Button
+                android:id="@+id/btnSelectPhoto"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Выбрать фото"
+                android:textColor="#FFA451"
+                android:textSize="14sp"/>
+        </LinearLayout>
+
+        <!-- Название -->
+        <EditText
+            android:id="@+id/edProductName"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/rectangle_21"
+            android:hint="Название товара"
+            android:paddingLeft="15dp"
+            android:fontFamily="@font/nun_reg"
+            android:layout_marginBottom="12dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Выберите категорию"
+            android:textSize="14sp"
+            android:textColor="#808080"
+            android:layout_marginBottom="4dp"/>
+
+        <Spinner
+            android:id="@+id/spProductCategory"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/rectangle_21"
+            android:paddingLeft="15dp"
+            android:layout_marginBottom="12dp"
+            android:spinnerMode="dropdown"/>
+
+        <!-- ЦЕНА И ККАЛ -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            android:layout_marginBottom="12dp">
+
+            <EditText
+                android:id="@+id/edProductPrice"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:layout_marginEnd="5dp"
+                android:background="@drawable/rectangle_21"
+                android:hint="Цена"
+                android:inputType="numberDecimal"
+                android:paddingLeft="15dp"/>
+
+            <EditText
+                android:id="@+id/edProductCalories"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:layout_marginStart="5dp"
+                android:background="@drawable/rectangle_21"
+                android:hint="Ккал"
+                android:inputType="number"
+                android:paddingLeft="15dp"/>
+        </LinearLayout>
+
+        <!-- БЛОК БЖУ -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="БЖУ на 100г"
+            android:textSize="14sp"
+            android:layout_marginBottom="4dp"
+            android:textColor="#808080"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="3"
+            android:layout_marginBottom="12dp">
+
+            <EditText
+                android:id="@+id/edProtein"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:layout_marginEnd="4dp"
+                android:background="@drawable/rectangle_21"
+                android:hint="Белки"
+                android:inputType="numberDecimal"
+                android:paddingLeft="10dp"
+                android:textSize="14sp"/>
+
+            <EditText
+                android:id="@+id/edFat"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:layout_marginHorizontal="2dp"
+                android:background="@drawable/rectangle_21"
+                android:hint="Жиры"
+                android:inputType="numberDecimal"
+                android:paddingLeft="10dp"
+                android:textSize="14sp"/>
+
+            <EditText
+                android:id="@+id/edCarbs"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:layout_marginStart="4dp"
+                android:background="@drawable/rectangle_21"
+                android:hint="Углев."
+                android:inputType="numberDecimal"
+                android:paddingLeft="10dp"
+                android:textSize="14sp"/>
+
+
+        </LinearLayout>
+        <EditText
+            android:id="@+id/edStockQuantity"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/rectangle_21"
+            android:hint="Количество на складе"
+            android:inputType="number"
+            android:paddingLeft="15dp"
+            android:fontFamily="@font/nun_reg"
+            android:layout_marginBottom="12dp"/>
+
+        <EditText
+            android:id="@+id/edProductDescription"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="@drawable/rectangle_21"
+            android:hint="Описание продукта"
+            android:gravity="top"
+            android:padding="15dp"
+            android:layout_marginBottom="24dp"/>
+
+        <Button
+            android:id="@+id/btnAddProduct"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:text="Опубликовать"
+            android:textAllCaps="false"
+            android:backgroundTint="#FFA451"
+            android:textColor="@color/white"
+            android:fontFamily="@font/nun_med"
+            android:textSize="16sp"/>
+    </LinearLayout>
+</ScrollView>

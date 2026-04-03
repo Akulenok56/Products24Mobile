@@ -19,6 +19,7 @@ class OrderSuccses : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
         btnToMain = findViewById(R.id.btnBack)
         btnToMain.setOnClickListener {
             startActivity(Intent(this, MainActivity::class.java))

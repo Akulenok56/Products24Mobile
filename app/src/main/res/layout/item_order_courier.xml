@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="16dp"
+    android:background="@drawable/rectangle_21"
+    android:backgroundTint="#F5F5F5"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/courOrderCustomer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/nun_med"
+        android:text="Клиент: Иван Иванов"
+        android:textColor="#27214D"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/courOrderAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/nun_reg"
+        android:text="Адрес: ул. Пушкина, 10"
+        android:textColor="#938DB5"
+        android:textSize="14sp" />
+
+    <Button
+        android:id="@+id/btnAcceptOrder"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="12dp"
+        android:backgroundTint="#FFA451"
+        android:fontFamily="@font/nun_med"
+        android:text="Принять и собрать"
+        android:textAllCaps="false"
+        android:textColor="@color/white" />
+</LinearLayout>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:background="@color/white">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Сборка заказа"
+        android:textColor="#27214D"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/nun_med" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Отметьте товары в наличии:"
+        android:textColor="#938DB5"
+        android:textSize="14sp"
+        android:layout_marginBottom="16dp"/>
+
+    <LinearLayout
+        android:id="@+id/assemblyItemsContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" />
+
+    <Button
+        android:id="@+id/btnOrderAssembled"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginTop="24dp"
+        android:backgroundTint="#FFA451"
+        android:text="Заказ собран"
+        android:enabled="false"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:fontFamily="@font/nun_med" />
+</LinearLayout>
