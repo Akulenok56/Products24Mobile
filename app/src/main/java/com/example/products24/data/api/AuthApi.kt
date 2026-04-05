@@ -23,6 +23,7 @@ import retrofit2.http.POST
 import retrofit2.http.PUT
 import retrofit2.http.Part
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface AuthApi {
 
@@ -57,11 +58,9 @@ interface AuthApi {
     suspend fun decrease(@Path("itemId") itemId: String): Response<Unit>
 
     @POST("orders/checkout")
-    suspend fun checkout(): Response<Unit>
+    suspend fun checkout(@Query("address") address: String): Response<Unit>
     @GET("orders/my-orders")
     suspend fun getMyOrders(): Response<List<OrderHistoryDto>>
-    @POST("Products")
-    suspend fun addProduct(@Body product: ProductDto): Response<Unit>
 
     @GET("orders/all") // Было Orders/all
     suspend fun getAllOrders(): List<OrderDto>
@@ -70,15 +69,11 @@ interface AuthApi {
     @GET("orders/pending") // Было Orders/pending
     suspend fun getPendingOrders(): List<OrderDto>
 
-    // 3. Исправляем пути для управления статусами (тоже с маленькой буквы)
-    @PUT("orders/{id}/accept")
-    suspend fun acceptOrder(@Path("id") orderId: String): Response<Unit>
+
 
     @PUT("orders/{id}/assembled")
     suspend fun markAsAssembled(@Path("id") orderId: String): Response<Unit>
 
-    @PUT("orders/{id}/complete")
-    suspend fun completeOrder(@Path("id") orderId: String): Response<Unit>
 
     @Multipart
     @POST("products/with-image")
@@ -99,6 +94,12 @@ interface AuthApi {
     suspend fun getOrderById(
         @Path("id") id: String
     ): Response<OrderDetailsDto>
+
+    @PUT("orders/{id}/shipped")
+    suspend fun markAsShipped(@Path("id") id: String): Response<Unit>
+
+    @PUT("orders/{id}/complete")
+    suspend fun markAsComplete(@Path("id") id: String): Response<Unit>
 
 
 }

@@ -56,28 +56,44 @@ class AdminActivity : AppCompatActivity() {
         orders.forEach { order ->
             val view = layoutInflater.inflate(R.layout.item_order, ordersContainer, false)
 
-            val tvName = view.findViewById<TextView>(R.id.orderId) // Используем как имя
+            val tvName = view.findViewById<TextView>(R.id.orderId)
             val tvStatus = view.findViewById<TextView>(R.id.orderStatus)
             val tvTotal = view.findViewById<TextView>(R.id.orderTotal)
 
-            tvName.text = "Клиент: ${order.userName}"
+            // 1. Добавляем отображение курьера (если в макете есть подходящее поле,
+            // например tvCourier, если нет — можно добавить в tvName через перенос строки)
+            val courierInfo = if (!order.courierName.isNullOrEmpty() && order.courierName != "Не назначен") {
+                "\n🚚 Курьер: ${order.courierName}"
+            } else {
+                "\n⌛ Курьер: Не назначен"
+            }
+
+            tvName.text = "Клиент: ${order.userName}$courierInfo"
             tvTotal.text = "${order.totalAmount} ₽"
+
             tvStatus.text = when(order.status) {
-                "Pending" -> "Ожидает"
-                "Assembling" -> "Сборка"
-                "Shipping" -> "В пути"
-                "Completed" -> "Доставлен"
+                "Новый", "Pending" -> "⚡ Новый"
+                "В пути", "Shipped" -> "🚚 Доставляется"
+                "Доставлен", "Completed" -> "✅ Завершен"
                 else -> order.status
             }
+
+            when (order.status) {
+                "Новый", "Pending" -> {
+                    tvStatus.setTextColor(android.graphics.Color.parseColor("#FFA451")) // Оранжевый
+                }
+                "В пути", "Shipped" -> {
+                    tvStatus.setTextColor(android.graphics.Color.parseColor("#2196F3")) // Синий
+                }
+                "Доставлен", "Completed" -> {
+                    tvStatus.setTextColor(android.graphics.Color.parseColor("#4CAF50")) // Зеленый
+                }
+            }
+
             view.setOnClickListener {
                 val intent = Intent(this, OrderDetailsActivity::class.java)
-                // Передаем ID заказа, чтобы на следующем экране загрузить его товары
-                intent.putExtra("ORDER_ID", order.orderID.toString())
+                intent.putExtra("ORDER_ID", order.orderID)
                 startActivity(intent)
-            }
-            // Красим статус в оранжевый, если заказ новый
-            if (order.status == "Pending") {
-                tvStatus.setTextColor(android.graphics.Color.parseColor("#FFA451"))
             }
 
             ordersContainer.addView(view)
