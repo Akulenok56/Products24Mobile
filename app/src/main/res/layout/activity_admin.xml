@@ -35,23 +35,71 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/adminTitle" />
 
+    <LinearLayout
+        android:id="@+id/tabButtonsContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/btnGoToAddProduct">
+
+        <Button
+            android:id="@+id/btnShowOrders"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/nun_med"
+            android:text="Заказы"
+            android:textAllCaps="false"
+            android:textColor="#FFA451"
+            android:textSize="14sp" />
+
+        <Button
+            android:id="@+id/btnShowProducts"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/nun_med"
+            android:text="Товары"
+            android:textAllCaps="false"
+            android:textColor="#938DB5"
+            android:textSize="14sp" />
+
+        <Button
+            android:id="@+id/btnShowUsers"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/nun_med"
+            android:text="Юзеры"
+            android:textAllCaps="false"
+            android:textColor="#938DB5"
+            android:textSize="14sp" />
+    </LinearLayout>
+
     <TextView
         android:id="@+id/orderListLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         android:fontFamily="@font/nun_med"
         android:text="Все заказы системы"
         android:textColor="#27214D"
         android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnGoToAddProduct" />
+        app:layout_constraintTop_toBottomOf="@id/tabButtonsContainer" />
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
+        android:clipToPadding="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/orderListLabel">
 
@@ -61,7 +109,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingHorizontal="24dp"
-            android:paddingBottom="24dp" />
+            android:paddingBottom="32dp" />
     </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

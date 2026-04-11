@@ -10,15 +10,18 @@ import com.example.products24.data.model.OrderHistoryDto
 import com.example.products24.data.model.OrderItemDto
 import com.example.products24.data.model.ProductDto
 import com.example.products24.data.model.RegisterRequest
+import com.example.products24.data.model.UserDto
 import com.example.products24.data.model.UserProfileResponse
 import com.example.products24.data.model.UserResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Response
 import retrofit2.http.Body
+import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Multipart
+import retrofit2.http.PATCH
 import retrofit2.http.POST
 import retrofit2.http.PUT
 import retrofit2.http.Part
@@ -73,8 +76,17 @@ interface AuthApi {
 
     @PUT("orders/{id}/assembled")
     suspend fun markAsAssembled(@Path("id") orderId: String): Response<Unit>
+    @GET("admin/users")
+    suspend fun getAdminAllUsers(): List<UserDto>
 
+    @PATCH("admin/users/{id}/role")
+    suspend fun updateRole(@Path("id") id: String, @Body role: String): Response<Unit>
 
+    @DELETE("products/admin/{id}")
+    suspend fun deleteProduct(@Path("id") id: String): Response<Unit>
+
+    @DELETE("admin/users/{id}") // Путь должен быть таким же, как в MapGroup + MapDelete
+    suspend fun deleteUser(@Path("id") id: String): Response<Unit>
     @Multipart
     @POST("products/with-image")
     suspend fun addProductWithImage(
