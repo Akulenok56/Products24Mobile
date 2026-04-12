@@ -14,4 +14,4 @@ data class OrderDto(
     val courierName: String?,
     @SerializedName("stockQuantity") val stockQuantity: String,
     @SerializedName("items") val items: List<OrderItemDto> = emptyList()
-)
+): java.io.Serializable

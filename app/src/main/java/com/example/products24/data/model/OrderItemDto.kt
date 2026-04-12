@@ -9,4 +9,4 @@ data class OrderItemDto(
     @SerializedName("unitPrice") val priceAtOrder: Double,
     val product: OrderProductInfo?,
     var isChecked: Boolean = false
-)
+): java.io.Serializable
