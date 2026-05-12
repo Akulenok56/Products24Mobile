@@ -59,17 +59,17 @@ class CourierActivity : AppCompatActivity() {
             val tvAddress = view.findViewById<TextView>(R.id.courOrderAddress)
             val btnAction = view.findViewById<Button>(R.id.btnAcceptOrder)
 
-            tvCustomer.text = "Заказ: ${order.userName}"
+            tvCustomer.text = "Заказ: ${order.orderID}"
             tvAddress.text = order.addressDelivery ?: "Адрес не указан"
 
             // Если заказ уже собран и готов к доставке
             if (order.status == "В пути" || order.status == "Shipped") {
                 btnAction.text = "Открыть карту"
-                btnAction.setBackgroundColor(Color.parseColor("#FFA451"))
+                btnAction.setBackgroundColor(Color.parseColor("#90ee90"))
             } else {
                 // Если заказ только поступил на сборку
                 btnAction.text = "Принять и собрать"
-                btnAction.setBackgroundColor(Color.parseColor("#FFA451"))
+                btnAction.setBackgroundColor(Color.parseColor("#90ee90"))
             }
 
             val clickListener = android.view.View.OnClickListener {

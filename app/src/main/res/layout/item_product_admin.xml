@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/nun_reg"
             android:text="500 ₽"
-            android:textColor="#FFA451"
+            android:textColor="#87cefa"
             android:textSize="14sp" />
     </LinearLayout>
 

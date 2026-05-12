@@ -43,7 +43,7 @@
         android:fontFamily="@font/nun_med"
         android:text="В курьеры"
         android:textAllCaps="false"
-        android:textColor="#FFA451"
+        android:textColor="#87cefa"
         android:textSize="12sp" />
 
     <ImageButton

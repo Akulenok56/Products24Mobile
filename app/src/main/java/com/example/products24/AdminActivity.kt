@@ -81,7 +81,8 @@ class AdminActivity : AppCompatActivity() {
         mainContainer.removeAllViews()
         orders.forEach { order ->
             val view = layoutInflater.inflate(R.layout.item_order, mainContainer, false)
-            val tvName = view.findViewById<TextView>(R.id.orderId)
+            val tvName = view.findViewById<TextView>(R.id.orderName)
+            val tvId = view.findViewById<TextView>(R.id.orderId)
             val tvStatus = view.findViewById<TextView>(R.id.orderStatus)
             val tvTotal = view.findViewById<TextView>(R.id.orderTotal)
 
@@ -89,6 +90,7 @@ class AdminActivity : AppCompatActivity() {
                 "\n🚚 Курьер: ${order.courierName}"
             } else "\n⌛ Курьер: Не назначен"
 
+            tvId.text = "Номер заказа: ${order.orderID}"
             tvName.text = "Клиент: ${order.userName}$courierInfo"
             tvTotal.text = "${order.totalAmount} ₽"
             tvStatus.text = order.status
@@ -223,7 +225,7 @@ class AdminActivity : AppCompatActivity() {
     // --- ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ ---
     private fun updateTabUI(activeButton: Button) {
         val inactiveColor = Color.parseColor("#938DB5")
-        val activeColor = Color.parseColor("#FFA451")
+        val activeColor = Color.parseColor("#87cefa")
 
         btnOrders.setTextColor(inactiveColor)
         btnProducts.setTextColor(inactiveColor)

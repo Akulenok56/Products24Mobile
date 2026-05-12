@@ -15,6 +15,15 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/orderName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nun_med"
+            android:text="Заказ #12345"
+            android:textColor="#27214D"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+        <TextView
             android:id="@+id/orderId"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -53,7 +62,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/nun_med"
             android:text="1500 ₽"
-            android:textColor="#FFA451"
+            android:textColor="#87cefa"
             android:textSize="16sp"
             android:textStyle="bold" />
 

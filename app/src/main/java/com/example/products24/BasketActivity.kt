@@ -2,6 +2,7 @@ package com.example.products24
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.Gravity
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -46,11 +47,13 @@ class BasketActivity : AppCompatActivity() {
 
         btnBack.setOnClickListener { finish() }
 
+        // Логика нажатия на кнопку оформления
         btnPay.setOnClickListener {
-            if (cartItems.isNotEmpty()) {
-                showPayDialog()
+            if (cartItems.isEmpty()) {
+                // Если список товаров пуст, выводим сообщение
+                Toast.makeText(this, "Невозможно оформить заказ, корзина пустая", Toast.LENGTH_LONG).show()
             } else {
-                Toast.makeText(this, "Корзина пуста", Toast.LENGTH_SHORT).show()
+                showPayDialog()
             }
         }
 
@@ -83,8 +86,25 @@ class BasketActivity : AppCompatActivity() {
     private fun showCartItems(items: List<CartItemDto>) {
         container.removeAllViews()
 
-        // Отключаем кнопку оплаты, если товаров нет
-        btnPay.isEnabled = items.isNotEmpty()
+        if (items.isEmpty()) {
+            // Визуально отключаем кнопку, если корзина пуста
+            btnPay.isEnabled = false
+            btnPay.alpha = 0.5f
+
+            // Добавляем текст "Корзина пуста" в центр списка
+            val emptyNotice = TextView(this).apply {
+                text = "Ваша корзина пуста"
+                gravity = Gravity.CENTER
+                textSize = 18f
+                setPadding(0, 100, 0, 0)
+            }
+            container.addView(emptyNotice)
+            return
+        }
+
+        // Если товары есть, включаем кнопку
+        btnPay.isEnabled = true
+        btnPay.alpha = 1.0f
 
         for (item in items) {
             val view = layoutInflater.inflate(R.layout.item_basket, container, false)
@@ -97,7 +117,7 @@ class BasketActivity : AppCompatActivity() {
             val btnMinus = view.findViewById<ImageView>(R.id.btnMinus)
 
             name.text = item.productName
-            count.text = item.quantity.toString()
+            count.text = "${item.quantity} шт."
             price.text = "${item.price * item.quantity} ₽"
 
             Glide.with(this).load(item.imageUrl).into(image)
@@ -113,7 +133,6 @@ class BasketActivity : AppCompatActivity() {
         val dialog = BottomSheetDialog(this, R.style.BottomSheetDialogTheme)
         val view = layoutInflater.inflate(R.layout.bottom_sheet_pay, null)
 
-        // Инициализация полей из твоего нового XML
         val edAdress = view.findViewById<EditText>(R.id.edAdress)
         val edNumberHome = view.findViewById<EditText>(R.id.edNumberHome)
         val btnClose = view.findViewById<ImageView>(R.id.btnClose)
@@ -122,7 +141,6 @@ class BasketActivity : AppCompatActivity() {
 
         btnClose.setOnClickListener { dialog.dismiss() }
 
-        // Логика для "Оплата при получении"
         btnPayCash.setOnClickListener {
             val street = edAdress.text.toString().trim()
             val house = edNumberHome.text.toString().trim()
@@ -134,10 +152,9 @@ class BasketActivity : AppCompatActivity() {
 
             val fullAddress = "ул. $street, д. $house"
             dialog.dismiss()
-            performCheckout(fullAddress) // Передаем адрес!
+            performCheckout(fullAddress)
         }
 
-        // Логика для "Оплата онлайн"
         btnPayCard.setOnClickListener {
             val street = edAdress.text.toString().trim()
             val house = edNumberHome.text.toString().trim()
@@ -149,7 +166,6 @@ class BasketActivity : AppCompatActivity() {
 
             val fullAddress = "ул. $street, д. $house"
             dialog.dismiss()
-            // Передаем адрес в следующий диалог, чтобы не потерять его
             showCardDialog(fullAddress)
         }
 
@@ -157,18 +173,14 @@ class BasketActivity : AppCompatActivity() {
         dialog.show()
     }
 
-    // 1. Добавляем параметр address: String в скобки
     private fun showCardDialog(address: String) {
         val dialog = BottomSheetDialog(this, R.style.BottomSheetDialogTheme)
         val view = layoutInflater.inflate(R.layout.bottom_sheet_cardinfo, null)
 
         view.findViewById<ImageView>(R.id.btnClose).setOnClickListener { dialog.dismiss() }
 
-        // Находим кнопку оплаты в диалоге карты
         view.findViewById<Button>(R.id.btnPayCard).setOnClickListener {
             dialog.dismiss()
-
-            // 2. Передаем полученный адрес в финальный метод оформления
             performCheckout(address)
         }
 
@@ -176,13 +188,10 @@ class BasketActivity : AppCompatActivity() {
         dialog.show()
     }
 
-
     private fun performCheckout(address: String) {
         lifecycleScope.launch {
             try {
                 val api = RetrofitInstance.authApi()
-
-                // ПЕРЕДАЕМ АДРЕС В API (убедись, что в AuthApi.kt метод принимает String)
                 val response = api.checkout(address)
 
                 if (response.isSuccessful) {

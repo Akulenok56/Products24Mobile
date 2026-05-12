@@ -76,7 +76,7 @@ class DeliveryActivity : AppCompatActivity() {
         drivingRouter = DirectionsFactory.getInstance().createDrivingRouter()
         searchManager = SearchFactory.getInstance().createSearchManager(SearchManagerType.COMBINED)
 
-        val startPoint = Point(51.763885, 55.119018) // Магазин
+        val startPoint = Point(51.818416, 55.115847) // Магазин
         val fullAddress = "Оренбург, ${order?.addressDelivery}"
 
         val searchOptions = SearchOptions().apply {
@@ -122,7 +122,7 @@ class DeliveryActivity : AppCompatActivity() {
                     mapObjects.addPlacemark(end)
 
                     val polyline = mapObjects.addPolyline(routes[0].geometry)
-                    polyline.setStrokeColor(Color.parseColor("#FFA451"))
+                    polyline.setStrokeColor(Color.parseColor("#90ee90"))
                     polyline.strokeWidth = 5f
 
                     mapView.mapWindow.map.move(CameraPosition(end, 15.0f, 0.0f, 0.0f))

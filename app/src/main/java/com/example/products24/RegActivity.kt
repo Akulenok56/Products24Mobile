@@ -11,6 +11,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import org.json.JSONObject // Для парсинга ошибки
 
 class RegActivity : AppCompatActivity() {
 
@@ -28,12 +29,7 @@ class RegActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_reg)
 
-
-        RetrofitInstance.init(
-            applicationContext,
-            "http://10.0.2.2:5162/"
-        )
-
+        RetrofitInstance.init(applicationContext, "http://10.0.2.2:5162/")
         initViews()
 
         btnStart.setOnClickListener {
@@ -54,7 +50,6 @@ class RegActivity : AppCompatActivity() {
     }
 
     private fun registerUser() {
-
         val fullName = loginEd.text.toString().trim()
         val pass = passEd.text.toString().trim()
         val repass = repPassEd.text.toString().trim()
@@ -91,23 +86,44 @@ class RegActivity : AppCompatActivity() {
 
                 withContext(Dispatchers.Main) {
                     if (response.isSuccessful) {
-
                         Toast.makeText(this@RegActivity, "Регистрация успешна", Toast.LENGTH_SHORT).show()
-
                         startActivity(Intent(this@RegActivity, LoginActivity::class.java))
                         finish()
-
                     } else {
-                        Toast.makeText(this@RegActivity, "Ошибка: ${response.code()}", Toast.LENGTH_SHORT).show()
+                        // --- ЛОГИКА ОБРАБОТКИ ОШИБОК БАЗЫ ДАННЫХ ---
+                        val errorBody = response.errorBody()?.string()
+
+                        // Пытаемся понять, что прислал сервер
+                        if (errorBody != null) {
+                            when {
+                                errorBody.contains("email", ignoreCase = true) -> {
+                                    Toast.makeText(this@RegActivity, "Пользователь с такой почтой уже зарегистрирован", Toast.LENGTH_LONG).show()
+                                }
+                                errorBody.contains("phone", ignoreCase = true) || errorBody.contains("number", ignoreCase = true) -> {
+                                    Toast.makeText(this@RegActivity, "Пользователь с таким номером уже зарегистрирован", Toast.LENGTH_LONG).show()
+                                }
+                                else -> {
+                                    // Если сервер прислал JSON с полем message
+                                    try {
+                                        val jsonObject = JSONObject(errorBody)
+                                        val message = jsonObject.optString("message", "Ошибка регистрации")
+                                        Toast.makeText(this@RegActivity, message, Toast.LENGTH_SHORT).show()
+                                    } catch (e: Exception) {
+                                        Toast.makeText(this@RegActivity, "Ошибка: ${response.code()}", Toast.LENGTH_SHORT).show()
+                                    }
+                                }
+                            }
+                        } else {
+                            Toast.makeText(this@RegActivity, "Ошибка: ${response.code()}", Toast.LENGTH_SHORT).show()
+                        }
                     }
                 }
 
             } catch (e: Exception) {
                 withContext(Dispatchers.Main) {
-                    Toast.makeText(this@RegActivity, "Ошибка сервера: ${e.message}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@RegActivity, "Ошибка сети: ${e.message}", Toast.LENGTH_SHORT).show()
                 }
             }
         }
     }
-
 }

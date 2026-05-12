@@ -33,7 +33,7 @@
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_marginTop="12dp"
-        android:backgroundTint="#FFA451"
+        android:backgroundTint="#90ee90"
         android:fontFamily="@font/nun_med"
         android:text="Принять и собрать"
         android:textAllCaps="false"

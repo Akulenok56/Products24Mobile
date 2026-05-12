@@ -9,7 +9,7 @@
         android:id="@+id/checkCollected"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:buttonTint="#FFA451" />
+        android:buttonTint="#90ee90" />
 
     <TextView
         android:id="@+id/tvItemName"

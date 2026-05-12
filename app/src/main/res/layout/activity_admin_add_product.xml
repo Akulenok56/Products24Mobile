@@ -45,7 +45,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Выбрать фото"
-                android:textColor="#FFA451"
+                android:textColor="#87cefa"
                 android:textSize="14sp"/>
         </LinearLayout>
 
@@ -189,7 +189,7 @@
             android:layout_height="56dp"
             android:text="Опубликовать"
             android:textAllCaps="false"
-            android:backgroundTint="#FFA451"
+            android:backgroundTint="#87cefa"
             android:textColor="@color/white"
             android:fontFamily="@font/nun_med"
             android:textSize="16sp"/>

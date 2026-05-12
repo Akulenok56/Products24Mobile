@@ -26,7 +26,7 @@
         android:layout_height="56dp"
         android:layout_marginHorizontal="24dp"
         android:layout_marginTop="20dp"
-        android:backgroundTint="#FFA451"
+        android:backgroundTint="#87cefa"
         android:fontFamily="@font/nun_med"
         android:text=" + Добавить новый товар"
         android:textAllCaps="false"
@@ -53,7 +53,7 @@
             android:fontFamily="@font/nun_med"
             android:text="Заказы"
             android:textAllCaps="false"
-            android:textColor="#FFA451"
+            android:textColor="#87cefa"
             android:textSize="14sp" />
 
         <Button
